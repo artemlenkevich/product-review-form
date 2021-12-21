@@ -32,12 +32,20 @@ export const ProductReviewForm: React.FC<{}> = () => {
         >
             {({ errors, touched, isValidating, handleChange, values }) => (
                 <Form>
-                    <div className={styles['input-group']}>
-                        { errors.fullName ? <div>{errors.fullName}</div> : <label htmlFor='fullName'>ФИО</label> }
-                        <Field className={styles.input} name='fullName' id='fullName' type='text'/>
+                    <div className={styles['form-row']}>
+                        <div className={styles['input-group']}>
+                            { errors.fullName ? <div>{errors.fullName}</div> : <label htmlFor='fullName'>ФИО</label> }
+                            <Field className={styles.input} name='fullName' id='fullName' type='text'/>
+                        </div>
+                        <div className={styles['input-group']}>
+                            { errors.email ? <div>{errors.email}</div> : <label htmlFor='email'>E-mail</label> }
+                            <Field className={styles.input} name='email' id='email' type='text'/>
+                        </div>
                     </div>
-                    <Field className={styles.input} type='text' name='email'/>
-                    <textarea className={styles.textarea} name='review'/>
+                    <div className={styles['input-group']}>
+                        { errors.review ? <div>{errors.review}</div> : <label htmlFor='fullName'>ФИО</label> }
+                        <Field className={styles.textarea} name='review' as='textarea' id='review' type='text'/>
+                    </div>
                     <button type='submit'>Submit</button>
                 </Form>
             )}            

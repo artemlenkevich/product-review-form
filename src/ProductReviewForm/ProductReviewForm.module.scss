@@ -9,6 +9,13 @@
     padding: 9px 2px 9px 12px;
 }
 
-.input-group {
-    
+.form-row {
+    display: flex;
+    margin-bottom: 12px;
+    .input-group {
+        flex-grow: 1;
+        &:first-child {
+            margin-right: 12px;
+        }
+    }
 }
