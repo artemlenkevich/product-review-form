@@ -1,49 +1,52 @@
 import styles from './ProductReviewForm.module.scss';
 import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
 
 interface FormValues {
-    fullName: string;
+    name: string;
     email: string;
     review: string;
 }
 
-const validate = (values: FormValues) => {
-    const errors = {} as FormValues;
-    if (!values.fullName) {
-        errors.fullName = 'Required';
-    } else if (values.fullName === '11') {
-        errors.fullName = '11'
-    }  
-
-    return errors;
-}
-
+const validationSchema = Yup.object().shape({
+    name: Yup.string()
+        .required('Поле не может быть пустым')
+        .matches(/\S/, 'Поле не может быть пустым'),
+    email: Yup.string()
+        .email('Некорректный email')
+        .required('Поле не может быть пустым'),
+    review: Yup.string()
+        .required('Поле не может быть пустым')
+        .matches(/^\S/, 'Поле не может быть пустым')
+        .matches(/\D/, 'Не только цифры')
+        // .matches(//, 'Не только заглавные бувы без пробелов')
+})
 
 export const ProductReviewForm: React.FC<{}> = () => {
 
     
     return (
         <Formik
-            initialValues={{ fullName: '', email: '', review: ''}}
+            initialValues={{ name: '', email: '', review: ''}}
             onSubmit={(values: FormValues) => {
                 console.log(values);
             }}
-            validate={validate}
+            validationSchema={validationSchema}
         >
-            {({ errors, touched, isValidating, handleChange, values }) => (
+            {({ errors }) => (
                 <Form>
                     <div className={styles['form-row']}>
                         <div className={styles['input-group']}>
-                            { errors.fullName ? <div>{errors.fullName}</div> : <label htmlFor='fullName'>ФИО</label> }
-                            <Field className={styles.input} name='fullName' id='fullName' type='text'/>
+                            { errors.name ? <div>{errors.name}</div> : <label className={styles.label} htmlFor='name'>ФИО</label> }
+                            <Field className={styles.input} name='name' id='name' type='text'/>
                         </div>
                         <div className={styles['input-group']}>
-                            { errors.email ? <div>{errors.email}</div> : <label htmlFor='email'>E-mail</label> }
+                            { errors.email ? <div>{errors.email}</div> : <label className={styles.label} htmlFor='email'>E-mail</label> }
                             <Field className={styles.input} name='email' id='email' type='text'/>
                         </div>
                     </div>
                     <div className={styles['input-group']}>
-                        { errors.review ? <div>{errors.review}</div> : <label htmlFor='fullName'>ФИО</label> }
+                        { errors.review ? <div>{errors.review}</div> : <label className={styles.label} htmlFor='name'>Отзыв</label> }
                         <Field className={styles.textarea} name='review' as='textarea' id='review' type='text'/>
                     </div>
                     <button type='submit'>Submit</button>

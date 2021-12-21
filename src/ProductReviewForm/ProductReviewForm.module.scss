@@ -9,13 +9,25 @@
     padding: 9px 2px 9px 12px;
 }
 
+.label {
+    display: block;
+    width: 100%;
+}
+
 .form-row {
     display: flex;
     margin-bottom: 12px;
+    @media(max-width: 360px) {
+        display: block;
+    }
     .input-group {
         flex-grow: 1;
         &:first-child {
             margin-right: 12px;
+            @media(max-width: 360px) {
+                margin-right: 0;
+                margin-bottom: 12px;
+            }
         }
     }
 }
