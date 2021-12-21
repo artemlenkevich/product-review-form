@@ -11,7 +11,7 @@ interface FormValues {
 const validationSchema = Yup.object().shape({
     name: Yup.string()
         .required('Поле не может быть пустым')
-        .matches(/\S/, 'Поле не может быть пустым'),
+        .matches(/^\S/, 'Поле не может быть пустым'),
     email: Yup.string()
         .email('Некорректный email')
         .required('Поле не может быть пустым'),
