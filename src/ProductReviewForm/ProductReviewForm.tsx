@@ -33,20 +33,20 @@ export const ProductReviewForm: React.FC<{}> = () => {
             }}
             validationSchema={validationSchema}
         >
-            {({ errors }) => (
+            {({ errors, touched }) => (
                 <Form>
                     <div className={styles['form-row']}>
                         <div className={styles['input-group']}>
-                            { errors.name ? <div>{errors.name}</div> : <label className={styles.label} htmlFor='name'>ФИО</label> }
+                            { errors.name && touched.name ? <div>{errors.name}</div> : <label className={styles.label} htmlFor='name'>ФИО</label> }
                             <Field className={styles.input} name='name' id='name' type='text'/>
                         </div>
                         <div className={styles['input-group']}>
-                            { errors.email ? <div>{errors.email}</div> : <label className={styles.label} htmlFor='email'>E-mail</label> }
+                            { errors.email && touched.email ? <div>{errors.email}</div> : <label className={styles.label} htmlFor='email'>E-mail</label> }
                             <Field className={styles.input} name='email' id='email' type='text'/>
                         </div>
                     </div>
                     <div className={styles['input-group']}>
-                        { errors.review ? <div>{errors.review}</div> : <label className={styles.label} htmlFor='name'>Отзыв</label> }
+                        { errors.review && touched.review ? <div>{errors.review}</div> : <label className={styles.label} htmlFor='name'>Отзыв</label> }
                         <Field className={styles.textarea} name='review' as='textarea' id='review' type='text'/>
                     </div>
                     <button type='submit'>Submit</button>
